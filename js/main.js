@@ -88,12 +88,25 @@ function agregarSolicitud(datos, id) {
 const alertasLista = document.getElementById("alertasLista");
 const recargarBtn = document.getElementById("recargarAlertas");
 
-const niveles = ["Crítico", "Alto", "Medio"];
 const coloresNivel = {
   "Crítico": "text-red-400 border-red-400/40",
   "Alto": "text-amber-400 border-amber-400/40",
   "Medio": "text-accent border-accent/40",
 };
+
+// Catálogo de alertas reales en español. Usamos el id que llega del
+// servidor (vía GET) para elegir qué alertas mostrar en cada recarga.
+const ALERTAS = [
+  { nivel: "Crítico", titulo: "Vulnerabilidad de ejecución remota (RCE)", texto: "Detectado un servidor expuesto sin el último parche de seguridad. Permite ejecutar código de forma remota." },
+  { nivel: "Alto", titulo: "Puerto RDP abierto a internet", texto: "El acceso remoto por escritorio está accesible públicamente. Riesgo alto de ataques de fuerza bruta." },
+  { nivel: "Medio", titulo: "Contraseñas débiles en cuentas de usuario", texto: "Varias cuentas usan contraseñas que no cumplen la política mínima de seguridad." },
+  { nivel: "Crítico", titulo: "Inyección SQL en formulario web", texto: "Un formulario público no valida las entradas, lo que permite manipular la base de datos." },
+  { nivel: "Alto", titulo: "Certificado SSL caducado", texto: "El certificado del sitio expiró. El tráfico podría no estar correctamente cifrado." },
+  { nivel: "Medio", titulo: "Software desactualizado en servidores", texto: "Se encontraron versiones antiguas de software con vulnerabilidades conocidas ya publicadas." },
+  { nivel: "Crítico", titulo: "Acceso de administrador sin doble factor", texto: "Las cuentas con privilegios no tienen activada la autenticación en dos pasos (2FA)." },
+  { nivel: "Alto", titulo: "Intentos de phishing detectados", texto: "Se identificaron correos sospechosos dirigidos a empleados del área financiera." },
+  { nivel: "Medio", titulo: "Copias de seguridad sin cifrar", texto: "Los respaldos se almacenan sin cifrado, exponiendo datos sensibles ante una fuga." },
+];
 
 async function cargarAlertas() {
   alertasLista.innerHTML =
@@ -107,17 +120,18 @@ async function cargarAlertas() {
     const datos = await res.json();
     alertasLista.innerHTML = "";
 
-    datos.forEach((d, i) => {
-      const nivel = niveles[i % niveles.length];
+    // Usamos el id recibido del servidor para seleccionar una alerta real
+    datos.forEach((d) => {
+      const alerta = ALERTAS[d.id % ALERTAS.length];
       const card = document.createElement("article");
       card.className =
         "fade-in rounded-xl border border-line bg-surface/40 p-5";
       card.innerHTML = `
-        <span class="inline-block rounded-full border px-2 py-0.5 text-xs font-semibold ${coloresNivel[nivel]}">
-          ${nivel}
+        <span class="inline-block rounded-full border px-2 py-0.5 text-xs font-semibold ${coloresNivel[alerta.nivel]}">
+          ${alerta.nivel}
         </span>
-        <h3 class="mt-3 font-semibold capitalize text-white">${escapar(d.title)}</h3>
-        <p class="mt-1 line-clamp-2 text-sm text-slate-400">${escapar(d.body)}</p>
+        <h3 class="mt-3 font-semibold text-white">${escapar(alerta.titulo)}</h3>
+        <p class="mt-1 text-sm text-slate-400">${escapar(alerta.texto)}</p>
       `;
       alertasLista.appendChild(card);
     });
