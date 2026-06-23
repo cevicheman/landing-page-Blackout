@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-base scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlackOut | Ciberseguridad Ofensiva</title>
+  <meta name="description" content="BlackOut evalúa tus defensas con ataques controlados, corrige vulnerabilidades y fortifica tu infraestructura." />
+
+  <!-- TailwindCSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: "#0a0e14",
+            surface: "#111722",
+            line: "#1f2937",
+            accent: "#22d3ee",
+            "accent-soft": "#0e7490",
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+            mono: ["ui-monospace", "SFMono-Regular", "monospace"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos personalizados (CSS propio) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="bg-base text-slate-200 font-sans antialiased">
+
+  <!-- ===== MENÚ DE NAVEGACIÓN (SPA: desplaza entre secciones) ===== -->
+  <header class="fixed top-0 inset-x-0 z-50 border-b border-line bg-base/90 backdrop-blur">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="#inicio" class="flex items-center gap-2 font-extrabold tracking-tight text-white">
+        <span class="grid h-8 w-8 place-items-center rounded-md bg-accent text-base font-mono">B</span>
+        BlackOut
+      </a>
+
+      <!-- Botón menú móvil -->
+      <button id="menuBtn" class="md:hidden rounded-md border border-line p-2 text-slate-300" aria-label="Abrir menú">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
+      <ul id="navLinks" class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <li><a class="nav-link hover:text-accent" href="#inicio">Inicio</a></li>
+        <li><a class="nav-link hover:text-accent" href="#servicios">Servicios</a></li>
+        <li><a class="nav-link hover:text-accent" href="#proceso">Proceso</a></li>
+        <li><a class="nav-link hover:text-accent" href="#alertas">Alertas</a></li>
+        <li><a class="rounded-md bg-accent px-4 py-2 font-semibold text-base hover:bg-cyan-300 transition" href="#contacto">Solicitar test</a></li>
+      </ul>
+    </nav>
+
+    <!-- Menú desplegable móvil -->
+    <ul id="mobileMenu" class="hidden flex-col gap-1 border-t border-line bg-surface px-4 py-3 text-sm md:hidden">
+      <li><a class="block rounded px-3 py-2 hover:bg-line" href="#inicio">Inicio</a></li>
+      <li><a class="block rounded px-3 py-2 hover:bg-line" href="#servicios">Servicios</a></li>
+      <li><a class="block rounded px-3 py-2 hover:bg-line" href="#proceso">Proceso</a></li>
+      <li><a class="block rounded px-3 py-2 hover:bg-line" href="#alertas">Alertas</a></li>
+      <li><a class="block rounded px-3 py-2 text-accent" href="#contacto">Solicitar test</a></li>
+    </ul>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- ===== SECCIÓN 1: INICIO (texto + imagen) ===== -->
+    <section id="inicio" class="mx-auto max-w-6xl px-4 py-20 md:py-28">
+      <div class="grid items-center gap-12 md:grid-cols-2">
+        <div>
+          <span class="inline-block rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent">
+            Red Team · Ciberseguridad
+          </span>
+          <h1 class="mt-5 text-4xl font-extrabold leading-tight text-white text-balance md:text-5xl">
+            Tus defensas no valen nada hasta que las <span class="text-accent">ponemos a prueba</span>.
+          </h1>
+          <p class="mt-5 max-w-lg leading-relaxed text-slate-400">
+            En BlackOut ejecutamos simulaciones de ataques controlados sobre tus redes para
+            descubrir vulnerabilidades reales. Luego aplicamos medidas correctivas, monitorización
+            continua y fortificación de tu infraestructura.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#contacto" class="rounded-md bg-accent px-6 py-3 font-semibold text-base hover:bg-cyan-300 transition">Solicitar evaluación</a>
+            <a href="#servicios" class="rounded-md border border-line px-6 py-3 font-semibold text-slate-200 hover:border-accent transition">Ver servicios</a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="overflow-hidden rounded-xl border border-line">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=70"
+                 alt="Centro de operaciones de ciberseguridad" class="h-full w-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN 2: SERVICIOS (listas + texto) ===== -->
+    <section id="servicios" class="border-t border-line bg-surface/40 py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <h2 class="text-3xl font-bold text-white">Lo que hacemos</h2>
+        <p class="mt-2 max-w-2xl text-slate-400">Validamos tus controles existentes y reducimos tu exposición al riesgo informático con un enfoque práctico.</p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article class="card rounded-xl border border-line bg-base p-6">
+            <h3 class="text-lg font-semibold text-accent">Ataques controlados</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li class="li-check">Pruebas de penetración en redes</li>
+              <li class="li-check">Simulaciones de phishing dirigido</li>
+              <li class="li-check">Escaneo de vulnerabilidades</li>
+            </ul>
+          </article>
+
+          <article class="card rounded-xl border border-line bg-base p-6">
+            <h3 class="text-lg font-semibold text-accent">Medidas correctivas</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li class="li-check">Parcheo y configuración segura</li>
+              <li class="li-check">Endurecimiento de servidores</li>
+              <li class="li-check">Plan de remediación priorizado</li>
+            </ul>
+          </article>
+
+          <article class="card rounded-xl border border-line bg-base p-6">
+            <h3 class="text-lg font-semibold text-accent">Defensa continua</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li class="li-check">Monitorización 24/7</li>
+              <li class="li-check">Fortificación de infraestructura</li>
+              <li class="li-check">Informes y validación de controles</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN 3: PROCESO (texto + pasos) ===== -->
+    <section id="proceso" class="py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <h2 class="text-3xl font-bold text-white">Nuestro proceso</h2>
+        <p class="mt-2 max-w-2xl text-slate-400">Un ciclo claro que va del diagnóstico a la fortificación.</p>
+
+        <ol class="mt-10 grid gap-6 md:grid-cols-4">
+          <li class="rounded-xl border border-line bg-surface/40 p-6">
+            <span class="font-mono text-2xl font-bold text-accent">01</span>
+            <h3 class="mt-2 font-semibold text-white">Reconocimiento</h3>
+            <p class="mt-1 text-sm text-slate-400">Mapeamos tu superficie de ataque.</p>
+          </li>
+          <li class="rounded-xl border border-line bg-surface/40 p-6">
+            <span class="font-mono text-2xl font-bold text-accent">02</span>
+            <h3 class="mt-2 font-semibold text-white">Explotación</h3>
+            <p class="mt-1 text-sm text-slate-400">Simulamos ataques reales y controlados.</p>
+          </li>
+          <li class="rounded-xl border border-line bg-surface/40 p-6">
+            <span class="font-mono text-2xl font-bold text-accent">03</span>
+            <h3 class="mt-2 font-semibold text-white">Corrección</h3>
+            <p class="mt-1 text-sm text-slate-400">Aplicamos medidas correctivas.</p>
+          </li>
+          <li class="rounded-xl border border-line bg-surface/40 p-6">
+            <span class="font-mono text-2xl font-bold text-accent">04</span>
+            <h3 class="mt-2 font-semibold text-white">Fortificación</h3>
+            <p class="mt-1 text-sm text-slate-400">Monitorizamos y reforzamos continuamente.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN 4: CONTACTO (formulario: input + select + button -> POST) ===== -->
+    <section id="contacto" class="border-t border-line bg-surface/40 py-20">
+      <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2">
+        <div>
+          <h2 class="text-3xl font-bold text-white">Solicita tu evaluación</h2>
+          <p class="mt-2 max-w-md text-slate-400">
+            Cuéntanos sobre tu empresa y el tipo de prueba que necesitas. Te contactaremos para
+            agendar la simulación.
+          </p>
+
+          <form id="contactForm" class="mt-8 space-y-4">
+            <div>
+              <label for="empresa" class="mb-1 block text-sm font-medium text-slate-300">Empresa</label>
+              <input id="empresa" name="empresa" type="text" required
+                     placeholder="Nombre de tu empresa"
+                     class="field w-full rounded-md border border-line bg-base px-4 py-3 text-sm outline-none focus:border-accent" />
+            </div>
+
+            <div>
+              <label for="email" class="mb-1 block text-sm font-medium text-slate-300">Correo de contacto</label>
+              <input id="email" name="email" type="email" required
+                     placeholder="seguridad@empresa.com"
+                     class="field w-full rounded-md border border-line bg-base px-4 py-3 text-sm outline-none focus:border-accent" />
+            </div>
+
+            <div>
+              <label for="servicio" class="mb-1 block text-sm font-medium text-slate-300">Servicio de interés</label>
+              <select id="servicio" name="servicio" required
+                      class="field w-full rounded-md border border-line bg-base px-4 py-3 text-sm outline-none focus:border-accent">
+                <option value="" disabled selected>Selecciona un servicio</option>
+                <option value="Pentesting de red">Pentesting de red</option>
+                <option value="Simulación de phishing">Simulación de phishing</option>
+                <option value="Monitorización continua">Monitorización continua</option>
+                <option value="Fortificación de infraestructura">Fortificación de infraestructura</option>
+              </select>
+            </div>
+
+            <button type="submit"
+                    class="w-full rounded-md bg-accent px-6 py-3 font-semibold text-base hover:bg-cyan-300 transition">
+              Enviar solicitud
+            </button>
+
+            <p id="formStatus" class="hidden text-sm"></p>
+          </form>
+        </div>
+
+        <!-- SECCIÓN PARA INTERACTUAR CON LOS DATOS DEL FORMULARIO -->
+        <div>
+          <h3 class="text-xl font-semibold text-white">Solicitudes registradas</h3>
+          <p class="mt-2 text-sm text-slate-400">Aquí aparecen las solicitudes que envías mediante el formulario.</p>
+
+          <div id="solicitudesVacio" class="mt-6 rounded-xl border border-dashed border-line p-8 text-center text-sm text-slate-500">
+            Aún no has enviado ninguna solicitud.
+          </div>
+
+          <ul id="solicitudesLista" class="mt-6 space-y-3"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN 5: ALERTAS (fetch GET) ===== -->
+    <section id="alertas" class="py-20">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-3xl font-bold text-white">Alertas de seguridad recientes</h2>
+            <p class="mt-2 max-w-2xl text-slate-400">Datos cargados dinámicamente mediante una petición HTTP GET.</p>
+          </div>
+          <button id="recargarAlertas" class="shrink-0 rounded-md border border-line px-4 py-2 text-sm font-semibold hover:border-accent transition">
+            Recargar
+          </button>
+        </div>
+
+        <div id="alertasLista" class="mt-10 grid gap-4 md:grid-cols-3"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line py-8 text-center text-sm text-slate-500">
+    <p>© 2026 BlackOut. Ciberseguridad ofensiva y defensa continua.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* ===========================================================
+   BlackOut — Estilos personalizados (CSS propio)
+   Complementan a TailwindCSS con detalles de marca.
+   =========================================================== */
+
+:root {
+  --accent: #22d3ee;
+}
+
+/* Scroll suave y compensación por el header fijo */
+html {
+  scroll-padding-top: 5rem;
+}
+
+/* Selección de texto con color de marca */
+::selection {
+  background: var(--accent);
+  color: #0a0e14;
+}
+
+/* Barra de scroll personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Viñetas tipo "check" para listas de servicios */
+.li-check {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.li-check::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Tarjetas con animación sutil al pasar el cursor */
+.card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px -12px rgba(34, 211, 238, 0.35);
+}
+
+/* Subrayado animado en enlaces del menú */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Animación de aparición para elementos creados con JS */
+.fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
